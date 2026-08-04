@@ -1,8 +1,20 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.57")
+    }
+}
+
 allprojects {
     repositories {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+
         maven {
             url = uri("https://maven.pkg.github.com/Mibrahim511/moddakir-sdk-andorid")
             credentials {
@@ -14,9 +26,11 @@ allprojects {
 }
 
 rootProject.buildDir = "../build"
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }
