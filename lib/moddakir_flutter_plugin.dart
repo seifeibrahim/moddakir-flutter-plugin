@@ -23,30 +23,42 @@ class ModdakirFlutterPlugin {
     return _platform.getPlatformVersion();
   }
 
-  /// Initialize the Moddakir Call SDK
-  /// Must be called before starting any calls
-  Future<bool> initializeCallSDK() {
-    return _platform.initializeCallSDK();
+  /// Initialize the Call SDK
+  Future<bool> initializeCallSDK() async {
+    return await _platform.initializeCallSDK();
   }
 
-  /// Start a call with the given configuration
-  Future<bool> startCall(CallConfig config) {
-    return _platform.startCall(config.toMap());
-  }
-
-  /// Start a call with simple parameters (convenience method)
-  Future<bool> startCallSimple({
-    required String callId,
-    String? userId,
-    String? sessionId,
-    Map<String, dynamic>? additionalParams,
-  }) {
-    final params = {
-      'callId': callId,
-      if (userId != null) 'userId': userId,
-      if (sessionId != null) 'sessionId': sessionId,
-      ...?additionalParams,
-    };
-    return _platform.startCall(params);
+  /// Start a call session with user data
+  /// The SDK will handle login, teacher search, and call creation internally
+  Future<bool> startCallSession({
+    required String name,
+    required String email,
+    required String phone,
+    required String gender,
+    required String language,
+    required String appName,
+    required String apiKey,
+    required String callType,
+    bool isDark = false,
+    int? primaryColor,
+    int? secondaryColor,
+    Map<String, dynamic>? metaData,
+    Map<String, dynamic>? sessionInfo,
+  }) async {
+    return await _platform.startCallSession(
+      name: name,
+      email: email,
+      phone: phone,
+      gender: gender,
+      language: language,
+      appName: appName,
+      apiKey: apiKey,
+      callType: callType,
+      isDark: isDark,
+      primaryColor: primaryColor,
+      secondaryColor: secondaryColor,
+      metaData: metaData,
+      sessionInfo: sessionInfo,
+    );
   }
 }

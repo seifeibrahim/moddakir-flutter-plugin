@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
 import '../../domain/models/call_user.dart';
-import 'dart:async';
+import '../../domain/entities/session_input.dart';
+import '../../di/call_injection.dart';
+import '../viewmodels/call_viewmodel.dart';
+import '../state/call_ui_state.dart';
 
 enum CallType { video, audio }
 
 class CallProvider extends ChangeNotifier {
-  final ModdakirFlutterPlugin _plugin = ModdakirFlutterPlugin.instance;
-  StreamSubscription<CallEvent>? _callEventsSubscription;
+  late final CallViewModel _viewModel;
 
-  CallUser _user = CallUser(
+  final CallUser _user = CallUser(
     name: 'mariam Omar',
     gender: 'male',
     phone: '+201099034061',
@@ -19,44 +20,56 @@ class CallProvider extends ChangeNotifier {
     sessionId: 'ts1419-282816',
   );
 
-  ThemeMode _themeMode = ThemeMode.dark;
-  String _themeColor = 'blue';
-  String? _status;
-  bool _isLoading = false;
-
   CallUser get user => _user;
+
+  ThemeMode _themeMode = ThemeMode.light;
   ThemeMode get themeMode => _themeMode;
+
+  String _themeColor = 'blue';
   String get themeColor => _themeColor;
-  String? get status => _status;
-  bool get isLoading => _isLoading;
 
   CallProvider() {
-    _listenToCallEvents();
+    _viewModel = CallViewModel(flowManager: CallInjection.instance.flowManager);
+    _viewModel.addListener(_onViewModelChanged);
   }
 
-  void _listenToCallEvents() {
-    _callEventsSubscription = _plugin.callEvents.listen(
-      (event) {
-        if (event is CallEndedEvent) {
-          _status = 'Call ended: ${event.state} (${event.duration}s)';
-          _isLoading = false;
-          notifyListeners();
-        } else if (event is CallStateUpdatedEvent) {
-          _status = 'Call state: ${event.state}';
-          notifyListeners();
-        }
-      },
-      onError: (error) {
-        _status = 'Error: $error';
-        _isLoading = false;
-        notifyListeners();
-      },
-    );
-  }
-
-  void updateUser(CallUser user) {
-    _user = user;
+  void _onViewModelChanged() {
     notifyListeners();
+  }
+
+  // Expose ViewModel state
+  CallUiState get uiState => CallUiState.fromFlowState(_viewModel.currentState);
+  bool get isLoading => _viewModel.isLoading;
+  String get status => _viewModel.statusMessage;
+  bool get isIdle => _viewModel.isIdle;
+  bool get isSearching => _viewModel.isSearching;
+  bool get isCalling => _viewModel.isCalling;
+  bool get isEnded => _viewModel.isEnded;
+
+  Future<void> startCall(CallType type) async {
+    final sessionInput = SessionInput(
+      name: _user.name,
+      gender: _user.gender,
+      phone: _user.phone,
+      email: _user.email,
+      language: _user.language,
+      callType: type.name,
+      isDark: _themeMode == ThemeMode.dark,
+    );
+
+    await _viewModel.startCall(sessionInput);
+  }
+
+  Future<void> callRandomTeacher() async {
+    await startCall(CallType.video);
+  }
+
+  void cancelCall() {
+    _viewModel.cancelCall();
+  }
+
+  void resetCall() {
+    _viewModel.reset();
   }
 
   void setThemeMode(ThemeMode mode) {
@@ -69,83 +82,10 @@ class CallProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> startCall(CallType type) async {
-    _isLoading = true;
-    _status = 'Starting ${type.name} call...';
-    notifyListeners();
-
-    try {
-      final config = CallConfig(
-        callId: 'call-${DateTime.now().millisecondsSinceEpoch}',
-        userId: _user.phone,
-        sessionId: _user.sessionId,
-        metadata: {
-          'name': _user.name,
-          'gender': _user.gender,
-          'email': _user.email,
-          'language': _user.language,
-          'sdkVersion': _user.sdkVersion,
-          'callType': type.name,
-        },
-      );
-
-      final success = await _plugin.startCall(config);
-
-      if (success) {
-        _status = '${type.name.toUpperCase()} call started';
-      } else {
-        _status = 'Failed to start call';
-        _isLoading = false;
-      }
-    } catch (e) {
-      _status = 'Error: $e';
-      _isLoading = false;
-    }
-
-    notifyListeners();
-  }
-
-  Future<void> callRandomTeacher() async {
-    _isLoading = true;
-    _status = 'Finding random teacher...';
-    notifyListeners();
-
-    await Future.delayed(const Duration(seconds: 1));
-
-    try {
-      final config = CallConfig(
-        callId: 'random-${DateTime.now().millisecondsSinceEpoch}',
-        userId: _user.phone,
-        sessionId: _user.sessionId,
-        metadata: {
-          'name': _user.name,
-          'gender': _user.gender,
-          'email': _user.email,
-          'language': _user.language,
-          'sdkVersion': _user.sdkVersion,
-          'callType': 'random',
-        },
-      );
-
-      final success = await _plugin.startCall(config);
-
-      if (success) {
-        _status = 'Connected to random teacher';
-      } else {
-        _status = 'No teachers available';
-        _isLoading = false;
-      }
-    } catch (e) {
-      _status = 'Error: $e';
-      _isLoading = false;
-    }
-
-    notifyListeners();
-  }
-
   @override
   void dispose() {
-    _callEventsSubscription?.cancel();
+    _viewModel.removeListener(_onViewModelChanged);
+    _viewModel.dispose();
     super.dispose();
   }
 }

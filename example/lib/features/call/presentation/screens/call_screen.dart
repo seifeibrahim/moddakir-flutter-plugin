@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import '../providers/call_provider.dart';
 import '../widgets/call_text_field.dart';
 import '../widgets/call_button.dart';
+import '../widgets/call_status_card.dart';
+import '../widgets/call_progress_indicator.dart';
+import '../../domain/entities/call_flow_state.dart';
 
 class CallScreen extends StatefulWidget {
   const CallScreen({super.key});
@@ -112,25 +115,44 @@ class _CallScreenState extends State<CallScreen> {
                       backgroundColor: Colors.blue,
                     ),
                     const SizedBox(height: 16),
-                    CallButton(
-                      label: 'CALL RANDOM TEACHER',
-                      onPressed: () => provider.callRandomTeacher(),
-                      isLoading: provider.isLoading,
+                    if (!provider.isLoading)
+                      CallButton(
+                        label: 'CALL RANDOM TEACHER',
+                        onPressed: () => provider.callRandomTeacher(),
+                        isLoading: false,
+                      )
+                    else
+                      CallButton(
+                        label: 'CALLING...',
+                        onPressed: () {},
+                        isLoading: true,
+                      ),
+                    const SizedBox(height: 20),
+                    CallStatusCard(
+                      message: provider.status,
+                      state: provider.uiState.flowState,
                     ),
-                    if (provider.status != null) ...[
-                      const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.blue.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.blue),
-                        ),
-                        child: Text(
-                          provider.status!,
-                          style: const TextStyle(color: Colors.blue),
-                          textAlign: TextAlign.center,
-                        ),
+                    if (provider.isSearching && provider.uiState.flowState is SearchingState) ...[
+                      const SizedBox(height: 16),
+                      CallProgressIndicator(
+                        currentAttempt: (provider.uiState.flowState as SearchingState).attempt,
+                        maxAttempts: (provider.uiState.flowState as SearchingState).maxAttempts,
+                      ),
+                    ],
+                    if (provider.isEnded) ...[
+                      const SizedBox(height: 16),
+                      CallButton(
+                        label: 'START NEW CALL',
+                        onPressed: () => provider.resetCall(),
+                        backgroundColor: Colors.green,
+                      ),
+                    ],
+                    if (provider.isLoading && !provider.isCalling) ...[
+                      const SizedBox(height: 16),
+                      CallButton(
+                        label: 'CANCEL',
+                        onPressed: () => provider.cancelCall(),
+                        backgroundColor: Colors.red,
                       ),
                     ],
                   ],
