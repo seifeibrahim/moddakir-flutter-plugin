@@ -31,4 +31,3 @@ build/
 # GitHub Packages credentials
 android/gradle.properties
 android/local.properties
-*.hprof
