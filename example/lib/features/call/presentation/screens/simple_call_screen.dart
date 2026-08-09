@@ -68,7 +68,7 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
       debugPrint('✅ Step 1 Complete: Got session credentials');
       debugPrint('🚀 Step 2: Passing credentials to Android SDK...');
       
-      // Step 2: Pass credentials to Android SDK
+      // Step 2: Pass credentials to SDK (Android & iOS)
       // The SDK will handle everything else (login, search, create call, etc.)
       final success = await ModdakirFlutterPlugin.instance.startCallSession(
         name: _nameController.text,
@@ -80,10 +80,17 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
         apiKey: _moddakirKeyController.text,
         callType: _selectedCallType,
         isDark: _isDark,
-        // Pass session credentials to SDK
+        // Pass credentials from API (both platforms)
+        token: sessionData['token'],  // 🔥 Required for iOS
+        sdkSessionId: sessionData['sdkSessionId'],  // 🔥 Required for both
+        // Session info for iOS
         sessionInfo: {
-          'token': sessionData['token'],
-          'sdkSessionId': sessionData['sdkSessionId'],
+          'fromSurah': '1',
+          'toSurah': '2',
+          'fromAyah': '1',
+          'toAyah': '50',
+          'pathType': 'initiation',
+          'notes': 'Test session'
         },
       );
 

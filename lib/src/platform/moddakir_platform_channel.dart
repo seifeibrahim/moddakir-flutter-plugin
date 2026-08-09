@@ -63,28 +63,53 @@ class ModdakirPlatformChannel {
     required String language,
     required String appName,
     required String apiKey,
-    String callType = 'audio',
+    String callType = 'Voice',
     bool isDark = false,
     int? primaryColor,
     int? secondaryColor,
     Map<String, dynamic>? metaData,
     Map<String, dynamic>? sessionInfo,
+    int callDuration = 30,
+    String? startDate,
+    int maxNumCalls = 3,
+    String environment = 'sandbox',
+    String? sdkSessionId,  // 🔥 Session ID from API (both platforms)
+    String? token,  // 🔥 Access token from API (required for iOS)
+    String? theme,  // Theme: light, dark, system
   }) async {
     try {
       final params = {
-        'name': name,
+        // Common parameters
+        'fullName': name,
         'email': email,
         'phone': phone,
         'gender': gender,
         'language': language,
+        'callType': callType,
+        'callDuration': callDuration,
+        'maxNumCalls': maxNumCalls,
+        'environment': environment,
+        
+        // Android-specific
         'appName': appName,
         'apiKey': apiKey,
-        'callType': callType,
         'isDark': isDark,
         if (primaryColor != null) 'primaryColor': primaryColor,
         if (secondaryColor != null) 'secondaryColor': secondaryColor,
-        if (metaData != null) 'metaData': metaData,
+        
+        // Session info (required for iOS)
         if (sessionInfo != null) 'sessionInfo': sessionInfo,
+        
+        // Session credentials from API (both platforms)
+        if (sdkSessionId != null) 'sdkSessionId': sdkSessionId,
+        if (token != null) 'token': token,  // 🔥 Required for iOS
+        
+        // Theme
+        if (theme != null) 'theme': theme,
+        
+        // Optional
+        if (metaData != null) 'metaData': metaData,
+        if (startDate != null) 'startDate': startDate,
       };
       
       debugPrint('📞 [Platform] Starting call session with params: $params');

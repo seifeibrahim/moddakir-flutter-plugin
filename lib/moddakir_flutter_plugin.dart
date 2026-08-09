@@ -44,6 +44,13 @@ class ModdakirFlutterPlugin {
     int? secondaryColor,
     Map<String, dynamic>? metaData,
     Map<String, dynamic>? sessionInfo,
+    int callDuration = 30,
+    String? startDate,
+    int maxNumCalls = 3,
+    String environment = 'sandbox',
+    String? sdkSessionId,  // Session ID from /auth/protected/sdk/session API
+    String? token,  // Access token from /auth/protected/sdk/session API (required for iOS)
+    String? theme,  // Theme: light, dark, system
   }) async {
     return await _platform.startCallSession(
       name: name,
@@ -59,6 +66,13 @@ class ModdakirFlutterPlugin {
       secondaryColor: secondaryColor,
       metaData: metaData,
       sessionInfo: sessionInfo,
+      callDuration: callDuration,
+      startDate: startDate,
+      maxNumCalls: maxNumCalls,
+      environment: environment,
+      sdkSessionId: sdkSessionId,
+      token: token,
+      theme: theme,
     );
   }
 }

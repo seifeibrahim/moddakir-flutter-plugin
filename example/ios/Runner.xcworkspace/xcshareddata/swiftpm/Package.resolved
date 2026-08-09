@@ -1,0 +1,149 @@
+{
+  "pins" : [
+    {
+      "identity" : "agorainfra_ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AgoraIO/AgoraInfra_iOS.git",
+      "state" : {
+        "revision" : "1efd68dbd67bd464e35e799dd3779fa1c6a114c6",
+        "version" : "1.3.9"
+      }
+    },
+    {
+      "identity" : "agorartcengine_ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AgoraIO/AgoraRtcEngine_iOS",
+      "state" : {
+        "revision" : "94a477c69f9ad730e2225f54948e87f9f4d77c24",
+        "version" : "4.6.2"
+      }
+    },
+    {
+      "identity" : "dsbridge-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/netless-io/DSBridge-IOS.git",
+      "state" : {
+        "revision" : "4c780b208af869a577977c24f5bbb453c716f3ce",
+        "version" : "4.0.2"
+      }
+    },
+    {
+      "identity" : "fastboard-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/netless-io/fastboard-iOS.git",
+      "state" : {
+        "revision" : "5aa35cead601166771b507aa4147750ac670e717",
+        "version" : "1.4.2"
+      }
+    },
+    {
+      "identity" : "fittedsheets",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gordontucker/FittedSheets.git",
+      "state" : {
+        "revision" : "ba34781367fb7c947e2a19334318cf440c92968c",
+        "version" : "2.7.1"
+      }
+    },
+    {
+      "identity" : "ios_call_module",
+      "kind" : "remoteSourceControl",
+      "location" : "git@bitbucket.org:moddakir-workspace/ios_call_module.git",
+      "state" : {
+        "revision" : "598dd457dead1093f0b689ed91a5e471a970b9db",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "keychainaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/KeychainAccess",
+      "state" : {
+        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
+        "version" : "4.2.2"
+      }
+    },
+    {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher",
+      "state" : {
+        "revision" : "410984bf301f4fa224fe56277b3f8672cc465c79",
+        "version" : "8.11.0"
+      }
+    },
+    {
+      "identity" : "moddakir-ios-n-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Moddakir-App/moddakir-ios-n-sdk",
+      "state" : {
+        "revision" : "ce8ea31ea095b90f751d541ad04c3961fec863b4",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "moddakir_network",
+      "kind" : "remoteSourceControl",
+      "location" : "git@bitbucket.org:moddakir-workspace/moddakir_network.git",
+      "state" : {
+        "revision" : "e923ffa4a69c5fa01abf779e09626c18d42ab004",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "moddakir_utils",
+      "kind" : "remoteSourceControl",
+      "location" : "git@bitbucket.org:moddakir-workspace/moddakir_utils.git",
+      "state" : {
+        "revision" : "71bcc420afcf26f86f723ff3bbbb0a78ad41ef32",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "netfox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kasketis/netfox",
+      "state" : {
+        "revision" : "557576032736fd3140422baefb68b8f76c55088f",
+        "version" : "1.21.0"
+      }
+    },
+    {
+      "identity" : "networkmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Amin-0-1/NetworkManager",
+      "state" : {
+        "revision" : "9c8a614b18cd087d83e5cf746a8e271f9fff4627",
+        "version" : "1.6.2"
+      }
+    },
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift.git",
+      "state" : {
+        "revision" : "132aea4f236ccadc51590b38af0357a331d51fa2",
+        "version" : "6.10.2"
+      }
+    },
+    {
+      "identity" : "white_yymodel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/netless-io/White_YYModel.git",
+      "state" : {
+        "revision" : "c7b8527150ecce0a1758f0f84c73fab13dc73fcd",
+        "version" : "1.0.7"
+      }
+    },
+    {
+      "identity" : "whiteboard-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/netless-io/Whiteboard-iOS.git",
+      "state" : {
+        "revision" : "682daee176e23b93dbed25ec61cc1331c4793a07",
+        "version" : "2.16.137"
+      }
+    }
+  ],
+  "version" : 2
+}

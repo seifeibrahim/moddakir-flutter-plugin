@@ -4,7 +4,7 @@ import android.util.Log
 
 /**
  * Setup for SDK listeners
- * TODO: Update based on SDK 1.0.32 API
+ * TODO: Update based on SDK 1.0.43 API
  */
 object CallListenersSetup {
     
@@ -12,7 +12,7 @@ object CallListenersSetup {
     
     fun setupAllListeners() {
         Log.d(TAG, "📡 Setting up SDK listeners...")
-        // TODO: Implement listeners based on SDK 1.0.32 API
+        // TODO: Implement listeners based on SDK 1.0.43 API
         // The old listeners API has changed in the new SDK version
         Log.d(TAG, "✅ Listeners setup complete (placeholder)")
     }

@@ -1,6 +1,6 @@
 name: moddakir_flutter_plugin
 description: Flutter plugin wrapper for Moddakir Call SDK. Enables video and audio calls with real-time event streaming for Android and iOS applications.
-version: 1.0.1
+version: 1.0.3
 homepage: https://github.com/YOUR_USERNAME/moddakir-flutter-plugin
 repository: https://github.com/YOUR_USERNAME/moddakir-flutter-plugin
 issue_tracker: https://github.com/YOUR_USERNAME/moddakir-flutter-plugin/issues
@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
+
 
 dev_dependencies:
   flutter_test:

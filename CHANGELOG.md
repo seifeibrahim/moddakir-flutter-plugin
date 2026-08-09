@@ -1,3 +1,12 @@
+## 1.0.3
+
+* ✅ **iOS Support Completed** - Full iOS implementation with Swift Package Manager
+* ✅ iOS native plugin implementation with ModdakirCallSDK integration
+* ✅ iOS event streaming support (CallEndedEvent, CallStateUpdatedEvent)
+* ✅ Comprehensive iOS setup documentation (README_IOS_SETUP.md)
+* 🔧 Updated Android implementation for better stability
+* 📚 Updated README with complete platform support information
+
 ## 1.0.0
 
 * Initial release of Moddakir Flutter Plugin
