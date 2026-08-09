@@ -6,6 +6,7 @@ import android.util.Log
 import com.moddakir.moddakir_flutter_plugin.core.SdkCallbackManager
 import com.moddakir.moddakir_flutter_plugin.core.SdkPreferences
 import com.example.sdksample.feature.call.domain.entity.Language
+import com.example.sdksample.feature.call.domain.entity.CallType
 import com.example.sdksample.feature.call.presentation.manager.CallFlowManager
 import com.example.sdksample.feature.call.presentation.manager.CallsSdk
 import com.example.sdksample.feature.call.presentation.manager.SdkListener
@@ -70,7 +71,7 @@ object FlutterCallFlowManager {
     fun startSdkCall(
         activity: Activity,
         language: String = "ar",
-        callType: String = "Voice",
+        callType: CallType = CallType.Voice,
         isDark: Boolean = false,
         primaryColor: Int? = null
     ) {

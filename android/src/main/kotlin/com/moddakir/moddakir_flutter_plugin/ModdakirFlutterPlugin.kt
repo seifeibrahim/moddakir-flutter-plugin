@@ -17,6 +17,7 @@ import com.moddakir.moddakir_flutter_plugin.core.SdkCallbackManager
 import com.moddakir.moddakir_flutter_plugin.core.SdkPreferences
 import com.moddakir.moddakir_flutter_plugin.core.call.FlutterCallFlowManager
 import com.moddakir.moddakir_flutter_plugin.core.listeners.CallListenersSetup
+import com.example.sdksample.feature.call.domain.entity.CallType
 
 /** ModdakirFlutterPlugin */
 class ModdakirFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, EventChannel.StreamHandler {
@@ -104,7 +105,13 @@ class ModdakirFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Ev
       val language = call.argument<String>("language") ?: "en"
       val appName = call.argument<String>("appName") ?: ""
       val apiKey = call.argument<String>("apiKey") ?: ""
-      val callType = call.argument<String>("callType") ?: "audio"
+      val callType = when (
+        call.argument<String>("callType")?.lowercase()
+      ) {
+        "video" -> CallType.Video
+        "voice" -> CallType.Voice
+        else -> CallType.Voice
+      }
       val isDark = call.argument<Boolean>("isDark") ?: false
       val primaryColor = call.argument<Int>("primaryColor")
       val secondaryColor = call.argument<Int>("secondaryColor")
@@ -127,26 +134,24 @@ class ModdakirFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Ev
         return
       }
       
-      // Store session credentials
-      if (sessionInfo != null) {
-        val token = sessionInfo["token"]?.toString()
-        val sdkSessionId = sessionInfo["sdkSessionId"]?.toString()
+      // Get token and sdkSessionId from root arguments
+      val token = call.argument<String>("token")
+      val sdkSessionId = call.argument<String>("sdkSessionId")
+      
+      if (token != null && sdkSessionId != null) {
+        // Store in memory for quick access
+        SdkCallbackManager.setSessionCredentials(
+          token = token,
+          sdkSessionId = sdkSessionId
+        )
         
-        if (token != null && sdkSessionId != null) {
-          // Store in memory for quick access
-          SdkCallbackManager.setSessionCredentials(
-            token = token,
-            sdkSessionId = sdkSessionId
-          )
-          
-          // Store in SharedPreferences so SDK can access it
-          SdkPreferences.setAccessToken(appContext, token)
-          SdkPreferences.setSdkSessionId(appContext, sdkSessionId)
-          
-          Log.d(TAG, "✅ Credentials stored in both memory and preferences")
-        } else {
-          Log.e(TAG, "❌ Token or SDK Session ID is null!")
-        }
+        // Store in SharedPreferences so SDK can access it
+        SdkPreferences.setAccessToken(appContext, token)
+        SdkPreferences.setSdkSessionId(appContext, sdkSessionId)
+        
+        Log.d(TAG, "✅ Credentials stored: token=${token.take(20)}..., sdkSessionId=$sdkSessionId")
+      } else {
+        Log.e(TAG, "❌ Token or SDK Session ID is null!")
       }
       
       Log.d(TAG, "✅ Session credentials ready for SDK")
