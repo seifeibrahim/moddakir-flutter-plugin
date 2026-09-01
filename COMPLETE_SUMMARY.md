@@ -44,9 +44,9 @@ example/lib/
 ### 2. Plugin Structure ✅
 
 ```
-moddakir-flutter-plugin/
+moddakir-flutter-n-sdk/
 ├── lib/
-│   ├── moddakir_flutter_plugin.dart             # Public API
+│   ├── moddakir_flutter_n_sdk.dart             # Public API
 │   └── src/
 │       ├── models/
 │       │   ├── call_event.dart                  # Event models
@@ -57,7 +57,7 @@ moddakir-flutter-plugin/
 │   ├── build.gradle                             # With Maven repo
 │   ├── gradle.properties.example                # Credentials template
 │   └── src/main/kotlin/.../
-│       ├── ModdakirFlutterPlugin.kt            # Main plugin
+│       ├── ModdakirFlutterNSdk.kt            # Main plugin
 │       └── core/
 │           ├── CallFlutterManager.kt           # Flutter bridge
 │           └── listeners/
@@ -122,7 +122,7 @@ UI (CallScreen)
 Provider (CallProvider)
     │
     ▼
-Plugin (ModdakirFlutterPlugin)
+Plugin (ModdakirFlutterNSdk)
     │
     ├─► MethodChannel ──► Android ──► SDK
     │
@@ -134,7 +134,7 @@ Plugin (ModdakirFlutterPlugin)
 ### Step 1: GitHub
 
 ```bash
-cd "/Users/seif/Desktop/Moddakir Project/moddakir-flutter-plugin"
+cd "/Users/seif/Desktop/Moddakir Project/moddakir-flutter-n-sdk"
 
 # Initialize & commit
 git init
@@ -143,7 +143,7 @@ git commit -m "Initial release v1.0.0"
 
 # Create GitHub repo at: https://github.com/new
 # Then:
-git remote add origin https://github.com/YOUR_USERNAME/moddakir-flutter-plugin.git
+git remote add origin https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk.git
 git branch -M main
 git push -u origin main
 
@@ -170,16 +170,16 @@ flutter pub publish
 
 ```yaml
 dependencies:
-  moddakir_flutter_plugin: ^1.0.0
+  moddakir_flutter_n_sdk: ^1.0.0
 ```
 
 ### Option 2: From GitHub
 
 ```yaml
 dependencies:
-  moddakir_flutter_plugin:
+  moddakir_flutter_n_sdk:
     git:
-      url: https://github.com/YOUR_USERNAME/moddakir-flutter-plugin.git
+      url: https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk.git
       ref: v1.0.0
 ```
 
@@ -187,8 +187,8 @@ dependencies:
 
 ```yaml
 dependencies:
-  moddakir_flutter_plugin:
-    path: ../moddakir-flutter-plugin
+  moddakir_flutter_n_sdk:
+    path: ../moddakir-flutter-n-sdk
 ```
 
 ### Setup in New Project
@@ -223,13 +223,13 @@ export GITHUB_TOKEN=your-github-token
 
 3. **Use in code**:
 ```dart
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
+import 'package:moddakir_flutter_n_sdk/moddakir_flutter_n_sdk.dart';
 
 // Initialize
-await ModdakirFlutterPlugin.instance.initializeCallSDK();
+await ModdakirFlutterNSdk.instance.initializeCallSDK();
 
 // Listen to events
-ModdakirFlutterPlugin.instance.callEvents.listen((event) {
+ModdakirFlutterNSdk.instance.callEvents.listen((event) {
   if (event is CallEndedEvent) {
     print('Call ended: ${event.state}');
   }
@@ -241,7 +241,7 @@ final config = CallConfig(
   userId: 'user-456',
   sessionId: 'session-789',
 );
-await ModdakirFlutterPlugin.instance.startCall(config);
+await ModdakirFlutterNSdk.instance.startCall(config);
 ```
 
 ## 🎨 Example App Usage
@@ -321,7 +321,7 @@ flutter run
 
 2. **Create GitHub Repo**:
    - Go to https://github.com/new
-   - Name: `moddakir-flutter-plugin`
+   - Name: `moddakir-flutter-n-sdk`
    - Public
    - Don't add README
 
@@ -330,7 +330,7 @@ flutter run
 git init
 git add .
 git commit -m "Initial release v1.0.0"
-git remote add origin https://github.com/YOUR_USERNAME/moddakir-flutter-plugin.git
+git remote add origin https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk.git
 git push -u origin main
 git tag v1.0.0
 git push origin v1.0.0
@@ -352,7 +352,7 @@ flutter pub publish
 
 ## 📞 Support
 
-- **GitHub Issues**: https://github.com/YOUR_USERNAME/moddakir-flutter-plugin/issues
+- **GitHub Issues**: https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk/issues
 - **Documentation**: See README.md and guides
 - **Example**: Check example/ folder
 

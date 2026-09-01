@@ -1,0 +1,39 @@
+
+cat > .codeiumignore << 'EOF'
+# Flutter generated / build
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+*.g.dart
+*.freezed.dart
+*.mocks.dart
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/.idea/
+android/local.properties
+*.apk
+*.aab
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.podspec
+ios/build/
+
+# IDE / misc
+.idea/
+.vscode/
+*.iml
+
+# Assets ثقيلة
+**/*.png
+**/*.jpg
+**/*.svg
+**/*.ttf

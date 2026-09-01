@@ -1,6 +1,6 @@
-# moddakir_flutter_plugin_example
+# moddakir_flutter_n_sdk_example
 
-Demonstrates how to use the moddakir_flutter_plugin plugin.
+Demonstrates how to use the moddakir_flutter_n_sdk plugin.
 
 ## Getting Started
 

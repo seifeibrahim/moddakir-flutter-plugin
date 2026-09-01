@@ -6,11 +6,11 @@
 
 1. **Gradle Configuration** (`android/build.gradle`)
    - Added GitHub Packages repository for Moddakir SDK
-   - Added dependency: `com.moddakir:call-sdk:1.0.21`
+   - Added dependency: `com.moddakir:call-sdk:1.0.64`
    - Configured credentials via environment variables or gradle.properties
 
 2. **Core Architecture** (`android/src/main/kotlin/`)
-   - `ModdakirFlutterPlugin.kt`: Main plugin with ActivityAware and EventChannel support
+   - `ModdakirFlutterNSdk.kt`: Main plugin with ActivityAware and EventChannel support
    - `CallFlutterManager.kt`: Singleton bridge between SDK callbacks and Flutter
    - `CallListenersSetup.kt`: Configures all SDK listeners (RTM, RTC, UpdateCall, ActionButtons)
 
@@ -32,7 +32,7 @@
    - Type-safe event mapping
    - Error handling
 
-3. **Public API** (`lib/moddakir_flutter_plugin.dart`)
+3. **Public API** (`lib/moddakir_flutter_n_sdk.dart`)
    - Singleton pattern
    - Clean API: `initializeCallSDK()`, `startCall()`, `callEvents` stream
    - Exports event models
@@ -48,7 +48,7 @@
 
 ### 🚧 Android Implementation
 
-1. **Complete `startCall()` method** in `ModdakirFlutterPlugin.kt`:
+1. **Complete `startCall()` method** in `ModdakirFlutterNSdk.kt`:
    ```kotlin
    private fun startCall(call: MethodCall, result: Result) {
        val callId = call.argument<String>("callId")
@@ -101,11 +101,11 @@
 Update `example/lib/main.dart` with a complete working example:
 ```dart
 import 'package:flutter/material.dart';
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
+import 'package:moddakir_flutter_n_sdk/moddakir_flutter_n_sdk.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ModdakirFlutterPlugin.instance.initializeCallSDK();
+  await ModdakirFlutterNSdk.instance.initializeCallSDK();
   runApp(MyApp());
 }
 
@@ -130,7 +130,7 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void initState() {
     super.initState();
-    _subscription = ModdakirFlutterPlugin.instance.callEvents.listen((event) {
+    _subscription = ModdakirFlutterNSdk.instance.callEvents.listen((event) {
       setState(() {
         if (event is CallEndedEvent) {
           _status = 'Call ended: ${event.state} (${event.duration}s)';
@@ -149,7 +149,7 @@ class _CallScreenState extends State<CallScreen> {
 
   Future<void> _startCall() async {
     try {
-      await ModdakirFlutterPlugin.instance.startCall(
+      await ModdakirFlutterNSdk.instance.startCall(
         callId: 'test-call-123',
         additionalParams: {
           'userId': 'user-456',
@@ -255,7 +255,7 @@ await plugin.startCall(...);
 ## Reference
 
 - Android Sample: `com.example.sdksample.core` package
-- SDK: `com.moddakir:call-sdk:1.0.21`
+- SDK: `com.moddakir:call-sdk:1.0.64`
 - GitHub: `Mibrahim511/moddakir-sdk-andorid`
 
 The implementation follows the exact same pattern as the Android sample you provided, with listeners forwarding to a manager that bridges to Flutter.

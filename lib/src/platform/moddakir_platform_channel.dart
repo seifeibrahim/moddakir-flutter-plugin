@@ -4,10 +4,10 @@ import '../models/call_event.dart';
 
 class ModdakirPlatformChannel {
   static const MethodChannel _methodChannel =
-      MethodChannel('moddakir_flutter_plugin');
+      MethodChannel('moddakir_flutter_n_sdk');
   
   static const EventChannel _eventChannel =
-      EventChannel('moddakir_flutter_plugin/events');
+      EventChannel('moddakir_flutter_n_sdk/events');
 
   Stream<CallEvent>? _eventStream;
 

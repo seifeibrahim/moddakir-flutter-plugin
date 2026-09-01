@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:label="moddakir_flutter_plugin_example"
+        android:label="moddakir_flutter_n_sdk_example"
         android:name=".ModdakirApp"
         android:theme="@style/ModdakirSdkTheme"
         android:icon="@mipmap/ic_launcher"
@@ -37,7 +37,7 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/ModdakirSdkTheme"
-            tools:replace="android:theme" />
+            tools:replace="android:theme,android:exported" />
 
         <meta-data
             android:name="flutterEmbedding"

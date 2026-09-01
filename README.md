@@ -16,7 +16,7 @@ Flutter plugin wrapper for Moddakir Call SDK (Android & iOS).
 Flutter App
     │
     ▼
-ModdakirFlutterPlugin (Dart)
+ModdakirFlutterNSdk (Dart)
     │
     ├─► MethodChannel ──► Android/iOS Plugin ──► Native SDK
     │
@@ -44,9 +44,9 @@ See [README_IOS_SETUP.md](README_IOS_SETUP.md) for detailed iOS setup instructio
 1. Add dependency:
 ```yaml
 dependencies:
-  moddakir_flutter_plugin:
+  moddakir_flutter_n_sdk:
     git:
-      url: https://github.com/your-org/moddakir-flutter-plugin.git
+      url: https://github.com/your-org/moddakir-flutter-n-sdk.git
 ```
 
 2. **Android:** Configure GitHub credentials:
@@ -59,23 +59,23 @@ export GITHUB_TOKEN=your-token
 
 4. Initialize SDK:
 ```dart
-await ModdakirFlutterPlugin.instance.initializeCallSDK();
+await ModdakirFlutterNSdk.instance.initializeCallSDK();
 ```
 
 ## Usage
 
 ```dart
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
+import 'package:moddakir_flutter_n_sdk/moddakir_flutter_n_sdk.dart';
 
 // Listen to call events
-ModdakirFlutterPlugin.instance.callEvents.listen((event) {
+ModdakirFlutterNSdk.instance.callEvents.listen((event) {
   if (event is CallEndedEvent) {
     print('Call ended: ${event.state}, duration: ${event.duration}s');
   }
 });
 
 // Start a call
-await ModdakirFlutterPlugin.instance.startCall(
+await ModdakirFlutterNSdk.instance.startCall(
   callId: 'call-123',
   additionalParams: {'userId': 'user-456'},
 );

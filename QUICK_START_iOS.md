@@ -19,7 +19,7 @@ In Xcode:
 1. Click **Runner** (blue icon) → **Package Dependencies** tab
 2. Click **"+"**
 3. Paste: `https://github.com/Moddakir-App/moddakir-ios-n-sdk`
-4. Version: `1.0.0`
+4. Version: `1.0.5`
 5. Click **"Add Package"**
 6. Wait... (Xcode is fetching dependencies)
 7. Select **ModdakirNativeSDK** → **"Add Package"**

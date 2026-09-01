@@ -3,4 +3,4 @@
 # Or set them as environment variables: GITHUB_USERNAME and GITHUB_TOKEN
 # Get token from: https://github.com/settings/tokens (with read:packages scope)
 #gpr.user=your-github-username
-#gpr.token=ghp_your_token_here
+#gpr.key=ghp_your_token_here

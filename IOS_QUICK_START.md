@@ -33,7 +33,7 @@ open Runner.xcworkspace
 
 1. In Xcode: **File > Add Package Dependencies**
 2. Enter URL: `https://github.com/Moddakir-App/moddakir-ios-n-sdk`
-3. Version: `1.0.0`
+3. Version: `1.0.5`
 4. Click **Add Package**
 5. Wait for Xcode to resolve dependencies (may take 1-2 minutes)
 
@@ -119,7 +119,7 @@ Check console logs for errors. Common causes:
 final sessionData = await SessionApi.getSdkSession(...);
 
 // 2. Start SDK with session ID
-await ModdakirFlutterPlugin.instance.startCallSession(
+await ModdakirFlutterNSdk.instance.startCallSession(
   sdkSessionId: sessionData['sdkSessionId'],
   sessionInfo: {
     'fromSurah': '1',

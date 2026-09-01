@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
-import '../../../../core/api/session_api.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moddakir_flutter_n_sdk/moddakir_flutter_n_sdk.dart';
+import '../../../../core/utils/error_handler.dart';
+import '../viewmodels/session_viewmodel.dart';
+import '../state/session_state.dart';
 
 class SimpleCallScreen extends StatefulWidget {
   const SimpleCallScreen({super.key});
@@ -13,14 +16,101 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
   final _nameController = TextEditingController(text: 'mariam Omar');
   final _emailController = TextEditingController(text: 'm.omar@moddakir.com');
   final _phoneController = TextEditingController(text: '+201099034061');
-  final _moddakirIdController = TextEditingController(text: 'sdk5');
-  final _moddakirKeyController = TextEditingController(text: 'GMD2ZvgCzYC8_NNkxjLe2D9TOkEnn7JIBMWstww-sAMJLzbURdZaKIAY');
-  
+  final _moddakirIdController = TextEditingController(text: 'sdk_5');
+  final _moddakirKeyController = TextEditingController(text: 'm15pJPd_RNwC_LId9mHweog9is4vGas-9KWBYcb0r7pY7BilcAFMnsBk');
+  final _timerController = TextEditingController(text: '50');
+  final _fromSurahController = TextEditingController(text: '1');
+  final _fromAyahController = TextEditingController(text: '1');
+  final _toSurahController = TextEditingController(text: '2');
+  final _toAyahController = TextEditingController(text: '50');
+  final _pathTypeController = TextEditingController(text: 'initiation');
+  final _notesController = TextEditingController(text: 'Test session');
+
   String _selectedGender = 'male';
   String _selectedLanguage = 'ar';
   String _selectedCallType = 'Voice';
   bool _isDark = false;
-  bool _isLoading = false;
+
+  Future<void> _handleSessionSuccess(SessionSuccess state) async {
+    debugPrint('✅ Step 1 Complete: Got session credentials');
+    debugPrint('🚀 Step 2: Passing credentials to SDK...');
+
+
+    try {
+      final success = await ModdakirFlutterNSdk.instance.startCallSession(
+        name: _nameController.text,
+        email: _emailController.text,
+        phone: _phoneController.text,
+        gender: _selectedGender,
+        language: _selectedLanguage,
+        appName: _moddakirIdController.text,
+        apiKey: _moddakirKeyController.text,
+        callType: _selectedCallType,
+        token: state.session.token,
+        sdkSessionId: state.session.sdkSessionId,
+        sessionInfo: {
+          'fromSurah': _fromSurahController.text,
+          'fromAyah': _fromAyahController.text,
+          'toSurah': _toSurahController.text,
+          'toAyah': _toAyahController.text,
+          'pathType': _pathTypeController.text,
+          'notes': _notesController.text
+        },
+      );
+
+      if (success) {
+        debugPrint('✅ Step 2 Complete: SDK will handle the rest!');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Call session started! SDK is handling the call...'),
+            ),
+          );
+        }
+      } else {
+        debugPrint('❌ Failed to start call session');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to start call')),
+          );
+        }
+      }
+    } catch (e) {
+      debugPrint('❌ Error starting SDK call: $e');
+      if (mounted) {
+        final errorMessage = ErrorHandler.getLocalizedErrorMessage(e, _selectedLanguage);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
+    }
+  }
+
+  void _handleSessionError(SessionError state) {
+    debugPrint('❌ Error getting session: ${state.message}');
+    if (mounted) {
+      final errorMessage = ErrorHandler.getLocalizedErrorMessage(
+        Exception(state.message),
+        _selectedLanguage,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(errorMessage),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 5),
+          action: SnackBarAction(
+            label: _selectedLanguage == 'ar' ? 'حسناً' : 'OK',
+            textColor: Colors.white,
+            onPressed: () {},
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   void dispose() {
@@ -29,6 +119,14 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
     _phoneController.dispose();
     _moddakirIdController.dispose();
     _moddakirKeyController.dispose();
+    _timerController.dispose();
+    _fromSurahController.dispose();
+    _fromAyahController.dispose();
+    _toSurahController.dispose();
+    _toAyahController.dispose();
+    _pathTypeController.dispose();
+    _notesController.dispose();
+
     super.dispose();
   }
 
@@ -42,89 +140,34 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
       return;
     }
 
-    setState(() => _isLoading = true);
+    debugPrint('🚀 Step 1: Getting SDK session credentials...');
 
-    try {
-      debugPrint('🚀 Step 1: Getting SDK session credentials...');
-      
-      // Step 1: Get session credentials from API
-      // This is the ONLY API call we make from Flutter
-      final sessionData = await SessionApi.getSdkSession(
-        name: _nameController.text,
-        email: _emailController.text,
-        phone: _phoneController.text,
-        gender: _selectedGender,
-        language: _selectedLanguage,
-        moddakirId: _moddakirIdController.text,
-        moddakirKey: _moddakirKeyController.text,
-        sessionInfo: {
-          'fromSurah': 'البقرة',
-          'fromAyah': '1',
-          'toSurah': 'البقرة',
-          'toAyah': '50',
-        },
-      );
-      
-      debugPrint('✅ Step 1 Complete: Got session credentials');
-      debugPrint('🚀 Step 2: Passing credentials to Android SDK...');
-      
-      // Step 2: Pass credentials to SDK (Android & iOS)
-      // The SDK will handle everything else (login, search, create call, etc.)
-      final success = await ModdakirFlutterPlugin.instance.startCallSession(
-        name: _nameController.text,
-        email: _emailController.text,
-        phone: _phoneController.text,
-        gender: _selectedGender,
-        language: _selectedLanguage,
-        appName: _moddakirIdController.text,
-        apiKey: _moddakirKeyController.text,
-        callType: _selectedCallType,
-        isDark: _isDark,
-        // Pass credentials from API (both platforms)
-        token: sessionData['token'],  // 🔥 Required for iOS
-        sdkSessionId: sessionData['sdkSessionId'],  // 🔥 Required for both
-        // Session info for iOS
-        sessionInfo: {
-          'fromSurah': '1',
-          'toSurah': '2',
-          'fromAyah': '1',
-          'toAyah': '50',
-          'pathType': 'initiation',
-          'notes': 'Test session'
-        },
-      );
-
-      if (success) {
-        debugPrint('✅ Step 2 Complete: SDK will handle the rest!');
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Call session started! SDK is handling the call...')),
-          );
-        }
-      } else {
-        debugPrint('❌ Failed to start call session');
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Failed to start call')),
-          );
-        }
-      }
-    } catch (e) {
-      debugPrint('❌ Error starting call: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
-      }
-    } finally {
-      if (mounted) {
-        setState(() => _isLoading = false);
-      }
-    }
+    await context.read<SessionCubit>().getSdkSession(
+      name: _nameController.text,
+      email: _emailController.text,
+      phone: _phoneController.text,
+      gender: _selectedGender,
+      language: _selectedLanguage,
+      moddakirId: _moddakirIdController.text,
+      moddakirKey: _moddakirKeyController.text,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    return BlocListener<SessionCubit, SessionState>(
+      listener: (context, state) {
+        if (state is SessionSuccess) {
+          _handleSessionSuccess(state);
+        } else if (state is SessionError) {
+          _handleSessionError(state);
+        }
+      },
+      child: _buildScaffold(context),
+    );
+  }
+
+  Widget _buildScaffold(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Moddakir Call'),
@@ -178,8 +221,54 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
               obscureText: true,
             ),
             const SizedBox(height: 16),
+            TextField(
+              controller: _timerController,
+              decoration: const InputDecoration(
+                labelText: 'Timer (seconds)',
+                hintText: 'Default 50 sec',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _fromSurahController,
+              decoration: const InputDecoration(
+                labelText: 'From Surah',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _fromAyahController,
+              decoration: const InputDecoration(
+                labelText: 'From Ayah',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _toSurahController,
+              decoration: const InputDecoration(
+                labelText: 'To Surah',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _toAyahController,
+              decoration: const InputDecoration(
+                labelText: 'To Ayah',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: _selectedGender,
+              initialValue: _selectedGender,
               decoration: const InputDecoration(
                 labelText: 'Gender',
                 border: OutlineInputBorder(),
@@ -192,7 +281,7 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: _selectedLanguage,
+              initialValue: _selectedLanguage,
               decoration: const InputDecoration(
                 labelText: 'Language',
                 border: OutlineInputBorder(),
@@ -205,7 +294,7 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: _selectedCallType,
+              initialValue: _selectedCallType,
               decoration: const InputDecoration(
                 labelText: 'Call Type',
                 border: OutlineInputBorder(),
@@ -217,19 +306,39 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
               onChanged: (value) => setState(() => _selectedCallType = value!),
             ),
             const SizedBox(height: 16),
+            TextField(
+              controller: _pathTypeController,
+              decoration: const InputDecoration(
+                labelText: 'Path Type',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _notesController,
+              decoration: const InputDecoration(
+                labelText: 'Notes',
+                border: OutlineInputBorder(),
+              ),
+              maxLines: 3,
+            ),
+            const SizedBox(height: 16),
             SwitchListTile(
               title: const Text('Dark Mode'),
               value: _isDark,
               onChanged: (value) => setState(() => _isDark = value),
             ),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: _isLoading ? null : _startCall,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal,
-                padding: const EdgeInsets.all(16),
-              ),
-              child: _isLoading
+            BlocBuilder<SessionCubit, SessionState>(
+              builder: (context, state) {
+                final isLoading = state is SessionLoading;
+                return ElevatedButton(
+                  onPressed: isLoading ? null : _startCall,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    padding: const EdgeInsets.all(16),
+                  ),
+                  child: isLoading
                   ? const SizedBox(
                       height: 20,
                       width: 20,
@@ -242,6 +351,8 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
                       'Start Call',
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
+                );
+              },
             ),
           ],
         ),

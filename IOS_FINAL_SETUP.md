@@ -7,14 +7,14 @@ All code is ready! You just need to **add the Swift Package manually** in Xcode.
 ## 📋 What's Already Done
 
 ### ✅ 1. iOS Plugin Code
-- `ios/Classes/ModdakirFlutterPlugin.swift` - Complete implementation
+- `ios/Classes/ModdakirFlutterNSdk.swift` - Complete implementation
 - Handles `startCallSession` with all required parameters
 - Implements `ModdakirSDKDelegate` callbacks
 - Event channel for SDK events
 
 ### ✅ 2. Platform Channel
 - `lib/src/platform/moddakir_platform_channel.dart` - Updated with `token` and `theme`
-- `lib/moddakir_flutter_plugin.dart` - Public API updated
+- `lib/moddakir_flutter_n_sdk.dart` - Public API updated
 
 ### ✅ 3. Example App
 - `example/lib/features/call/presentation/screens/simple_call_screen.dart`
@@ -26,7 +26,7 @@ All code is ready! You just need to **add the Swift Package manually** in Xcode.
 ### ✅ 5. Documentation
 - `README_IOS_SETUP.md` - Detailed setup guide
 - `README.md` - Updated with iOS instructions
-- `ios/moddakir_flutter_plugin.podspec` - Clear warning about manual setup
+- `ios/moddakir_flutter_n_sdk.podspec` - Clear warning about manual setup
 
 ## 🚀 What You Need to Do (One-Time Setup)
 
@@ -49,7 +49,7 @@ open ios/Runner.xcworkspace
    ```
    https://github.com/Moddakir-App/moddakir-ios-n-sdk
    ```
-6. Select version: **1.0.0** (or "Up to Next Major Version" from 1.0.0)
+6. Select version: **1.0.2** (or "Up to Next Major Version" from 1.0.0)
 7. Click **"Add Package"**
 8. Wait for Xcode to resolve dependencies (1-2 minutes)
 9. When prompted, select **ModdakirNativeSDK** and click **"Add Package"**

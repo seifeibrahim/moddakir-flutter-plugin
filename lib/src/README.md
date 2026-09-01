@@ -4,7 +4,7 @@
 
 ```
 lib/
-├── moddakir_flutter_plugin.dart          # Public API
+├── moddakir_flutter_n_sdk.dart          # Public API
 ├── src/
 │   ├── models/
 │   │   └── call_event.dart               # Event models
@@ -16,8 +16,8 @@ lib/
 ## Android Layer
 
 ```
-android/src/main/kotlin/com/moddakir/moddakir_flutter_plugin/
-├── ModdakirFlutterPlugin.kt              # Main plugin entry point
+android/src/main/kotlin/com/moddakir/moddakir_flutter_n_sdk/
+├── ModdakirFlutterNSdk.kt              # Main plugin entry point
 ├── core/
 │   ├── CallFlutterManager.kt             # Manages Flutter-Android bridge
 │   └── listeners/
@@ -27,20 +27,20 @@ android/src/main/kotlin/com/moddakir/moddakir_flutter_plugin/
 ## Usage Example
 
 ```dart
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
+import 'package:moddakir_flutter_n_sdk/moddakir_flutter_n_sdk.dart';
 
 // Initialize SDK
-await ModdakirFlutterPlugin.instance.initializeCallSDK();
+await ModdakirFlutterNSdk.instance.initializeCallSDK();
 
 // Listen to call events
-ModdakirFlutterPlugin.instance.callEvents.listen((event) {
+ModdakirFlutterNSdk.instance.callEvents.listen((event) {
   if (event is CallEndedEvent) {
     print('Call ended: ${event.state}, duration: ${event.duration}');
   }
 });
 
 // Start a call
-await ModdakirFlutterPlugin.instance.startCall(
+await ModdakirFlutterNSdk.instance.startCall(
   callId: '123',
   additionalParams: {
     'userId': 'user123',
@@ -54,7 +54,7 @@ await ModdakirFlutterPlugin.instance.startCall(
 Flutter App
     │
     ▼
-ModdakirFlutterPlugin (Dart)
+ModdakirFlutterNSdk (Dart)
     │
     ▼
 ModdakirPlatformChannel
@@ -67,12 +67,12 @@ ModdakirPlatformChannel
 ## Key Components
 
 ### Flutter Side
-- **ModdakirFlutterPlugin**: Singleton public API
+- **ModdakirFlutterNSdk**: Singleton public API
 - **ModdakirPlatformChannel**: Handles platform communication
 - **CallEvent Models**: Type-safe event classes
 
 ### Android Side
-- **ModdakirFlutterPlugin.kt**: Implements FlutterPlugin, ActivityAware, EventChannel.StreamHandler
+- **ModdakirFlutterNSdk.kt**: Implements FlutterPlugin, ActivityAware, EventChannel.StreamHandler
 - **CallFlutterManager**: Singleton that bridges SDK callbacks to Flutter
 - **CallListenersSetup**: Configures all SDK listeners (RTM, RTC, UpdateCall, ActionButtons)
 

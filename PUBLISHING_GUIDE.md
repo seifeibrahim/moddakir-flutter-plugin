@@ -12,7 +12,7 @@
 
 ```bash
 # افتح https://github.com/new
-# اسم الـ repo: moddakir-flutter-plugin
+# اسم الـ repo: moddakir-flutter-n-sdk
 # Description: Flutter plugin for Moddakir Call SDK
 # Public repository
 # لا تضيف README (موجود already)
@@ -21,7 +21,7 @@
 ### 2. Initialize Git و Push
 
 ```bash
-cd "/Users/seif/Desktop/Moddakir Project/moddakir-flutter-plugin"
+cd "/Users/seif/Desktop/Moddakir Project/moddakir-flutter-n-sdk"
 
 # Initialize git (if not already)
 git init
@@ -33,7 +33,7 @@ git add .
 git commit -m "Initial release v1.0.0 - Moddakir Flutter Plugin"
 
 # Add remote (استبدل YOUR_USERNAME باسم المستخدم بتاعك)
-git remote add origin https://github.com/YOUR_USERNAME/moddakir-flutter-plugin.git
+git remote add origin https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk.git
 
 # Push
 git branch -M main
@@ -52,7 +52,7 @@ git push origin v1.0.0
 
 ### 4. Create GitHub Release
 
-1. اذهب إلى: `https://github.com/YOUR_USERNAME/moddakir-flutter-plugin/releases/new`
+1. اذهب إلى: `https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk/releases/new`
 2. اختر Tag: `v1.0.0`
 3. Release title: `v1.0.0 - Initial Release`
 4. Description: انسخ من `CHANGELOG.md`
@@ -65,8 +65,8 @@ git push origin v1.0.0
 **⚠️ مهم جداً:** استبدل `YOUR_USERNAME` في `pubspec.yaml`:
 
 ```yaml
-homepage: https://github.com/YOUR_ACTUAL_USERNAME/moddakir-flutter-plugin
-repository: https://github.com/YOUR_ACTUAL_USERNAME/moddakir-flutter-plugin
+homepage: https://github.com/YOUR_ACTUAL_USERNAME/moddakir-flutter-n-sdk
+repository: https://github.com/YOUR_ACTUAL_USERNAME/moddakir-flutter-n-sdk
 ```
 
 ### 2. Verify Package
@@ -101,7 +101,7 @@ flutter pub publish
 
 بعد النشر، افتح:
 ```
-https://pub.dev/packages/moddakir_flutter_plugin
+https://pub.dev/packages/moddakir_flutter_n_sdk
 ```
 
 ## Part 3: استخدام الـ Plugin في مشروع آخر
@@ -116,16 +116,16 @@ https://pub.dev/packages/moddakir_flutter_plugin
 dependencies:
   flutter:
     sdk: flutter
-  moddakir_flutter_plugin: ^1.0.0
+  moddakir_flutter_n_sdk: ^1.0.0
 ```
 
 أو من GitHub مباشرة:
 
 ```yaml
 dependencies:
-  moddakir_flutter_plugin:
+  moddakir_flutter_n_sdk:
     git:
-      url: https://github.com/YOUR_USERNAME/moddakir-flutter-plugin.git
+      url: https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk.git
       ref: v1.0.0
 ```
 
@@ -175,13 +175,13 @@ export GITHUB_TOKEN=your-github-token
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
+import 'package:moddakir_flutter_n_sdk/moddakir_flutter_n_sdk.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize SDK
-  await ModdakirFlutterPlugin.instance.initializeCallSDK();
+  await ModdakirFlutterNSdk.instance.initializeCallSDK();
   
   runApp(MyApp());
 }
@@ -206,7 +206,7 @@ class _CallScreenState extends State<CallScreen> {
     super.initState();
     
     // Listen to call events
-    ModdakirFlutterPlugin.instance.callEvents.listen((event) {
+    ModdakirFlutterNSdk.instance.callEvents.listen((event) {
       if (event is CallEndedEvent) {
         print('Call ended: ${event.state}, duration: ${event.duration}s');
       }
@@ -220,7 +220,7 @@ class _CallScreenState extends State<CallScreen> {
       sessionId: 'session-789',
     );
     
-    await ModdakirFlutterPlugin.instance.startCall(config);
+    await ModdakirFlutterNSdk.instance.startCall(config);
   }
 
   @override
@@ -251,7 +251,7 @@ class _CallScreenState extends State<CallScreen> {
 
 # 3. Commit changes
 git add .
-git commit -m "Release v1.0.1 - Bug fixes"
+git commit -m "Release v1.0.2 - Bug fixes"
 
 # 4. Create tag
 git tag v1.0.1
@@ -282,7 +282,7 @@ flutter pub publish
 
 ### 📝 Package Naming
 
-إذا `moddakir_flutter_plugin` مأخوذ على pub.dev، استخدم:
+إذا `moddakir_flutter_n_sdk` مأخوذ على pub.dev، استخدم:
 - `moddakir_call_sdk`
 - `moddakir_sdk`
 - `moddakir_calls`
@@ -333,7 +333,7 @@ git tag v1.0.0
 git push origin v1.0.0
 
 # Update in project
-flutter pub upgrade moddakir_flutter_plugin
+flutter pub upgrade moddakir_flutter_n_sdk
 ```
 
 ## Example pubspec.yaml for Users
@@ -348,7 +348,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  moddakir_flutter_plugin: ^1.0.0
+  moddakir_flutter_n_sdk: ^1.0.0
 
 dev_dependencies:
   flutter_test:

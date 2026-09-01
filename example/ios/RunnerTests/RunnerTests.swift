@@ -3,7 +3,7 @@ import UIKit
 import XCTest
 
 
-@testable import moddakir_flutter_plugin
+@testable import moddakir_flutter_n_sdk
 
 // This demonstrates a simple unit test of the Swift portion of this plugin's implementation.
 //
@@ -12,7 +12,7 @@ import XCTest
 class RunnerTests: XCTestCase {
 
   func testGetPlatformVersion() {
-    let plugin = ModdakirFlutterPlugin()
+    let plugin = ModdakirFlutterNSdk()
 
     let call = FlutterMethodCall(methodName: "getPlatformVersion", arguments: [])
 

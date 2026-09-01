@@ -44,7 +44,7 @@ open ios/Runner.xcworkspace
    ```
    https://github.com/Moddakir-App/moddakir-ios-n-sdk
    ```
-6. Select version: **1.0.0** (or "Up to Next Major Version" from 1.0.0)
+6. Select version: **1.0.5** (or "Up to Next Major Version" from 1.0.5)
 7. Click **"Add Package"**
 8. Wait for Xcode to resolve dependencies (may take 1-2 minutes)
 9. When prompted, select **ModdakirNativeSDK** and click **"Add Package"**

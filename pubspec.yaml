@@ -1,9 +1,9 @@
-name: moddakir_flutter_plugin
+name: moddakir_flutter_n_sdk
 description: Flutter plugin wrapper for Moddakir Call SDK. Enables video and audio calls with real-time event streaming for Android and iOS applications.
 version: 1.0.3
-homepage: https://github.com/YOUR_USERNAME/moddakir-flutter-plugin
-repository: https://github.com/YOUR_USERNAME/moddakir-flutter-plugin
-issue_tracker: https://github.com/YOUR_USERNAME/moddakir-flutter-plugin/issues
+homepage: https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk
+repository: https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk
+issue_tracker: https://github.com/YOUR_USERNAME/moddakir-flutter-n-sdk/issues
 
 environment:
   sdk: ^3.5.4
@@ -38,10 +38,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.moddakir.moddakir_flutter_plugin
-        pluginClass: ModdakirFlutterPlugin
+        package: com.moddakir.moddakir_flutter_n_sdk
+        pluginClass: ModdakirFlutterNSdk
       ios:
-        pluginClass: ModdakirFlutterPlugin
+        pluginClass: ModdakirFlutterNSdk
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

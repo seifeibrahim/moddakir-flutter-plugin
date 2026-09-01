@@ -38,7 +38,7 @@ gpr.token=your-github-token
 ### 2. Install Dependencies
 
 ```bash
-cd moddakir-flutter-plugin
+cd moddakir-flutter-n-sdk
 flutter pub get
 ```
 
@@ -52,9 +52,9 @@ flutter build apk
 ## Project Structure
 
 ```
-moddakir-flutter-plugin/
+moddakir-flutter-n-sdk/
 ├── lib/
-│   ├── moddakir_flutter_plugin.dart          # Public API
+│   ├── moddakir_flutter_n_sdk.dart          # Public API
 │   └── src/
 │       ├── models/
 │       │   └── call_event.dart               # Event models
@@ -63,8 +63,8 @@ moddakir-flutter-plugin/
 ├── android/
 │   ├── build.gradle                           # Gradle config with Maven repo
 │   ├── gradle.properties                      # GitHub credentials (gitignored)
-│   └── src/main/kotlin/com/moddakir/moddakir_flutter_plugin/
-│       ├── ModdakirFlutterPlugin.kt          # Main plugin
+│   └── src/main/kotlin/com/moddakir/moddakir_flutter_n_sdk/
+│       ├── ModdakirFlutterNSdk.kt          # Main plugin
 │       └── core/
 │           ├── CallFlutterManager.kt         # Flutter bridge
 │           └── listeners/
@@ -79,29 +79,29 @@ moddakir-flutter-plugin/
 In your `pubspec.yaml`:
 ```yaml
 dependencies:
-  moddakir_flutter_plugin:
+  moddakir_flutter_n_sdk:
     git:
-      url: https://github.com/your-org/moddakir-flutter-plugin.git
+      url: https://github.com/your-org/moddakir-flutter-n-sdk.git
       ref: main
 ```
 
 Or for local development:
 ```yaml
 dependencies:
-  moddakir_flutter_plugin:
-    path: ../moddakir-flutter-plugin
+  moddakir_flutter_n_sdk:
+    path: ../moddakir-flutter-n-sdk
 ```
 
 ### 2. Initialize SDK
 
 ```dart
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
+import 'package:moddakir_flutter_n_sdk/moddakir_flutter_n_sdk.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize the Call SDK
-  await ModdakirFlutterPlugin.instance.initializeCallSDK();
+  await ModdakirFlutterNSdk.instance.initializeCallSDK();
   
   runApp(MyApp());
 }
@@ -122,7 +122,7 @@ class _CallScreenState extends State<CallScreen> {
   void initState() {
     super.initState();
     
-    _callEventsSubscription = ModdakirFlutterPlugin.instance.callEvents.listen((event) {
+    _callEventsSubscription = ModdakirFlutterNSdk.instance.callEvents.listen((event) {
       if (event is CallEndedEvent) {
         print('Call ended: ${event.state}');
         print('Duration: ${event.duration} seconds');
@@ -143,7 +143,7 @@ class _CallScreenState extends State<CallScreen> {
 
   Future<void> _startCall() async {
     try {
-      await ModdakirFlutterPlugin.instance.startCall(
+      await ModdakirFlutterNSdk.instance.startCall(
         callId: 'call-123',
         additionalParams: {
           'userId': 'user-456',
@@ -196,7 +196,7 @@ For GitHub Actions:
 
 ## Troubleshooting
 
-### Issue: "Could not resolve com.moddakir:call-sdk:1.0.21"
+### Issue: "Could not resolve com.moddakir:call-sdk:1.0.64"
 
 **Solution**: Check GitHub credentials
 ```bash
@@ -232,7 +232,7 @@ _subscription = plugin.callEvents.listen(...); // Too late!
 
 Based on the Android sample from:
 - GitHub: `Mibrahim511/moddakir-sdk-andorid`
-- Package: `com.moddakir:call-sdk:1.0.21`
+- Package: `com.moddakir:call-sdk:1.0.64`
 
 The plugin follows the same listener pattern:
 - `CallbackUpdateCallListener` → `CallFlutterManager.onCallEnded()`

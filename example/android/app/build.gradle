@@ -9,9 +9,9 @@ plugins {
 }
 
 android {
-    namespace = "com.moddakir.moddakir_flutter_plugin_example"
+    namespace = "com.moddakir.moddakir_flutter_n_sdk_example"
     compileSdk = 36
-    ndkVersion = "27.0.12077973"
+    ndkVersion = "28.2.13676358"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -24,7 +24,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.moddakir.moddakir_flutter_plugin_example"
+        applicationId = "com.moddakir.moddakir_flutter_n_sdk_example"
         minSdk = 24
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

@@ -45,7 +45,7 @@ final sessionData = await SessionApi.getSdkSession(
   phone: '+1234567890',
   gender: 'male',
   language: 'ar',
-  moddakirId: 'sdk5',
+  moddakirId: 'sdk_5',
   moddakirKey: 'YOUR_API_KEY',
   sessionInfo: {...},
 );
@@ -56,13 +56,13 @@ final sessionData = await SessionApi.getSdkSession(
 ### Step 2: Launch SDK (Both Platforms)
 
 ```dart
-await ModdakirFlutterPlugin.instance.startCallSession(
+await ModdakirFlutterNSdk.instance.startCallSession(
   name: 'John Doe',
   email: 'john@example.com',
   phone: '+1234567890',
   gender: 'male',
   language: 'ar',
-  appName: 'sdk5',
+  appName: 'sdk_5',
   apiKey: 'YOUR_API_KEY',
   callType: 'Voice',
   sdkSessionId: sessionData['sdkSessionId'],  // 🔥 From API
@@ -90,7 +90,7 @@ await ModdakirFlutterPlugin.instance.startCallSession(
 
 ### Android
 
-**SDK:** `com.moddakir:call-sdk:1.0.24`
+**SDK:** `com.moddakir:call-sdk:1.0.64`
 
 **Setup:**
 1. SDK dependency in `android/build.gradle`
@@ -104,7 +104,7 @@ await ModdakirFlutterPlugin.instance.startCallSession(
 CallsSdk.builder(activity)
     .setSDkSessionId(sdkSessionId)
     .setToken(token)
-    .setAppName("sdk5")
+    .setAppName("sdk_5")
     .setLanguage(Language.ar)
     .setCallType("Voice")
     .setEnvironment(Environment.SANDBOX)
@@ -112,13 +112,13 @@ CallsSdk.builder(activity)
 ```
 
 **Files:**
-- `android/src/main/kotlin/com/moddakir/moddakir_flutter_plugin/ModdakirFlutterPlugin.kt`
-- `android/src/main/kotlin/com/moddakir/moddakir_flutter_plugin/core/call/FlutterCallFlowManager.kt`
-- `android/src/main/kotlin/com/moddakir/moddakir_flutter_plugin/core/SdkCallbackManager.kt`
+- `android/src/main/kotlin/com/moddakir/moddakir_flutter_n_sdk/ModdakirFlutterNSdk.kt`
+- `android/src/main/kotlin/com/moddakir/moddakir_flutter_n_sdk/core/call/FlutterCallFlowManager.kt`
+- `android/src/main/kotlin/com/moddakir/moddakir_flutter_n_sdk/core/SdkCallbackManager.kt`
 
 ### iOS
 
-**SDK:** `ModdakirNativeSDK` v1.0.0 (Swift Package)
+**SDK:** `ModdakirNativeSDK` v1.0.5 (Swift Package)
 
 **Setup:**
 1. Add Swift Package from GitHub
@@ -128,7 +128,7 @@ CallsSdk.builder(activity)
 
 **Implementation:**
 ```swift
-// ModdakirFlutterPlugin.swift
+// ModdakirFlutterNSdk.swift
 let config = SDKConfig(
     fullName: fullName,
     email: email,
@@ -147,7 +147,7 @@ SDKManager.shared.start(from: viewController, config: config)
 ```
 
 **Files:**
-- `ios/Classes/ModdakirFlutterPlugin.swift`
+- `ios/Classes/ModdakirFlutterNSdk.swift`
 
 ## 🔧 Setup Instructions
 
@@ -182,7 +182,7 @@ SDKManager.shared.start(from: viewController, config: config)
 3. **Add Swift Package:**
    - File > Add Package Dependencies
    - URL: `https://github.com/Moddakir-App/moddakir-ios-n-sdk`
-   - Version: `1.0.0`
+   - Version: `1.0.5`
 
 4. **Update Info.plist:**
    ```xml
@@ -215,7 +215,7 @@ SDKManager.shared.start(from: viewController, config: config)
 Both platforms send events back to Flutter:
 
 ```dart
-ModdakirFlutterPlugin.instance.callEvents.listen((event) {
+ModdakirFlutterNSdk.instance.callEvents.listen((event) {
   switch (event.type) {
     case 'onCallStateChanged':
       print('Call state: ${event.state}');
@@ -241,7 +241,7 @@ ModdakirFlutterPlugin.instance.callEvents.listen((event) {
 
 **Headers:**
 ```
-Moddakir-ID: sdk5
+Moddakir-ID: sdk_5
 Moddakir-Key: YOUR_API_KEY
 Content-Type: application/json
 ```
@@ -375,6 +375,6 @@ For issues or questions:
 
 ---
 
-**Version:** 1.0.0  
+**Version:** 1.0.5  
 **Last Updated:** January 4, 2027  
 **Platforms:** Android (API 24+), iOS (13.0+)

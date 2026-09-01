@@ -61,7 +61,7 @@ The example app will:
 
 The plugin is ready but needs the actual SDK call implementation. Open:
 ```
-android/src/main/kotlin/com/moddakir/moddakir_flutter_plugin/ModdakirFlutterPlugin.kt
+android/src/main/kotlin/com/moddakir/moddakir_flutter_n_sdk/ModdakirFlutterNSdk.kt
 ```
 
 Find the `startCall()` method (line ~69) and replace the TODO with actual SDK code:
@@ -177,9 +177,9 @@ curl -H "Authorization: token YOUR_TOKEN" \
 ## Project Structure Summary
 
 ```
-moddakir-flutter-plugin/
+moddakir-flutter-n-sdk/
 ├── lib/
-│   ├── moddakir_flutter_plugin.dart          # ✅ Public API (Complete)
+│   ├── moddakir_flutter_n_sdk.dart          # ✅ Public API (Complete)
 │   └── src/
 │       ├── models/
 │       │   ├── call_event.dart               # ✅ Event models (Complete)
@@ -190,7 +190,7 @@ moddakir-flutter-plugin/
 │   ├── build.gradle                           # ✅ Gradle config (Complete)
 │   ├── gradle.properties.example              # ✅ Credentials template
 │   └── src/main/kotlin/.../
-│       ├── ModdakirFlutterPlugin.kt          # 🚧 Main plugin (Needs SDK integration)
+│       ├── ModdakirFlutterNSdk.kt          # 🚧 Main plugin (Needs SDK integration)
 │       └── core/
 │           ├── CallFlutterManager.kt         # ✅ Flutter bridge (Complete)
 │           └── listeners/

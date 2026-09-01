@@ -1,4 +1,4 @@
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
+import 'package:moddakir_flutter_n_sdk/moddakir_flutter_n_sdk.dart';
 
 sealed class CallFlowState {
   const CallFlowState();

@@ -48,10 +48,10 @@
     {
       "identity" : "ios_call_module",
       "kind" : "remoteSourceControl",
-      "location" : "git@bitbucket.org:moddakir-workspace/ios_call_module.git",
+      "location" : "https://github.com/Moddakir-App/ios_call_module.git",
       "state" : {
-        "revision" : "598dd457dead1093f0b689ed91a5e471a970b9db",
-        "version" : "1.0.1"
+        "branch" : "sdk5",
+        "revision" : "1b830acbaedc0380e25adc9e61d7f5d9da4cf958"
       }
     },
     {
@@ -75,28 +75,28 @@
     {
       "identity" : "moddakir-ios-n-sdk",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Moddakir-App/moddakir-ios-n-sdk",
+      "location" : "https://github.com/Moddakir-App/moddakir-ios-n-sdk.git",
       "state" : {
-        "revision" : "ce8ea31ea095b90f751d541ad04c3961fec863b4",
-        "version" : "1.0.1"
+        "branch" : "main",
+        "revision" : "29b5a1777a7f3d91f4c95fb86575b74cbd5d8c01"
       }
     },
     {
       "identity" : "moddakir_network",
       "kind" : "remoteSourceControl",
-      "location" : "git@bitbucket.org:moddakir-workspace/moddakir_network.git",
+      "location" : "https://github.com/Moddakir-App/moddakir_network.git",
       "state" : {
-        "revision" : "e923ffa4a69c5fa01abf779e09626c18d42ab004",
-        "version" : "1.0.0"
+        "branch" : "sdk5",
+        "revision" : "e0ba7919c98e179fa6980e36fed00384a338c777"
       }
     },
     {
       "identity" : "moddakir_utils",
       "kind" : "remoteSourceControl",
-      "location" : "git@bitbucket.org:moddakir-workspace/moddakir_utils.git",
+      "location" : "https://github.com/Moddakir-App/moddakir_utils.git",
       "state" : {
-        "revision" : "71bcc420afcf26f86f723ff3bbbb0a78ad41ef32",
-        "version" : "1.0.0"
+        "branch" : "sdk5",
+        "revision" : "b0bfafb5ade94f1f5415b4c5a948426b407caff2"
       }
     },
     {
@@ -113,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Amin-0-1/NetworkManager",
       "state" : {
-        "revision" : "9c8a614b18cd087d83e5cf746a8e271f9fff4627",
-        "version" : "1.6.2"
+        "revision" : "8e1c08ce84c1905fd6542afa0199d908c04ca541",
+        "version" : "1.6.4"
       }
     },
     {

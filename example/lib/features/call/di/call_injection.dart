@@ -1,11 +1,9 @@
+import 'package:http/http.dart' as http;
 import '../data/datasources/call_api_service.dart';
-import '../data/repositories/call_repository_impl.dart';
-import '../domain/repositories/call_repository.dart';
-import '../domain/usecases/login_to_sdk_usecase.dart';
-import '../domain/usecases/get_random_provider_usecase.dart';
-import '../domain/usecases/create_call_usecase.dart';
-import '../domain/usecases/update_call_usecase.dart';
-import '../presentation/manager/call_flow_manager.dart';
+import '../data/repositories/session_repository_impl.dart';
+import '../domain/repositories/session_repository.dart';
+import '../domain/usecases/get_sdk_session_usecase.dart';
+import '../presentation/viewmodels/session_viewmodel.dart';
 
 class CallInjection {
   static CallInjection? _instance;
@@ -16,64 +14,45 @@ class CallInjection {
 
   CallInjection._();
 
-  CallApiService? _apiService;
-  CallRepository? _repository;
-  LoginToSdkUseCase? _loginUseCase;
-  GetRandomProviderUseCase? _getProviderUseCase;
-  CreateCallUseCase? _createCallUseCase;
-  UpdateCallUseCase? _updateCallUseCase;
-  CallFlowManager? _flowManager;
+  http.Client? _httpClient;
+  SessionRemoteDataSource? _sessionDataSource;
+  SessionRepository? _sessionRepository;
+  GetSdkSessionUseCase? _getSdkSessionUseCase;
+  SessionCubit? _sessionCubit;
 
-  CallApiService get apiService {
-    _apiService ??= CallApiService();
-    return _apiService!;
+  http.Client get httpClient {
+    _httpClient ??= http.Client();
+    return _httpClient!;
   }
 
-  CallRepository get repository {
-    _repository ??= CallRepositoryImpl(apiService);
-    return _repository!;
+  SessionRemoteDataSource get sessionDataSource {
+    _sessionDataSource ??= SessionRemoteDataSourceImpl(client: httpClient);
+    return _sessionDataSource!;
   }
 
-  LoginToSdkUseCase get loginUseCase {
-    _loginUseCase ??= LoginToSdkUseCase(repository);
-    return _loginUseCase!;
+  SessionRepository get sessionRepository {
+    _sessionRepository ??= SessionRepositoryImpl(remoteDataSource: sessionDataSource);
+    return _sessionRepository!;
   }
 
-  GetRandomProviderUseCase get getProviderUseCase {
-    _getProviderUseCase ??= GetRandomProviderUseCase(repository);
-    return _getProviderUseCase!;
+  GetSdkSessionUseCase get getSdkSessionUseCase {
+    _getSdkSessionUseCase ??= GetSdkSessionUseCase(repository: sessionRepository);
+    return _getSdkSessionUseCase!;
   }
 
-  CreateCallUseCase get createCallUseCase {
-    _createCallUseCase ??= CreateCallUseCase(repository);
-    return _createCallUseCase!;
-  }
-
-  UpdateCallUseCase get updateCallUseCase {
-    _updateCallUseCase ??= UpdateCallUseCase(repository);
-    return _updateCallUseCase!;
-  }
-
-  CallFlowManager get flowManager {
-    _flowManager ??= CallFlowManager(
-      loginUseCase: loginUseCase,
-      getProviderUseCase: getProviderUseCase,
-      createCallUseCase: createCallUseCase,
-      updateCallUseCase: updateCallUseCase,
-    );
-    return _flowManager!;
+  SessionCubit get sessionCubit {
+    _sessionCubit ??= SessionCubit(getSdkSessionUseCase: getSdkSessionUseCase);
+    return _sessionCubit!;
   }
 
   void reset() {
-    _apiService?.dispose();
-    _flowManager?.dispose();
+    _httpClient?.close();
+    _sessionCubit?.close();
     
-    _apiService = null;
-    _repository = null;
-    _loginUseCase = null;
-    _getProviderUseCase = null;
-    _createCallUseCase = null;
-    _updateCallUseCase = null;
-    _flowManager = null;
+    _httpClient = null;
+    _sessionDataSource = null;
+    _sessionRepository = null;
+    _getSdkSessionUseCase = null;
+    _sessionCubit = null;
   }
 }

@@ -27,7 +27,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBm+LjZdgYoUW04VHiPMiJPSDr44FJe74RsnpEoeBX4I
 1. Open your iOS project in Xcode: `example/ios/Runner.xcworkspace`
 2. Go to **File > Add Package Dependencies**
 3. Enter the repository URL: `https://github.com/Moddakir-App/moddakir-ios-n-sdk`
-4. Select version: `1.0.0`
+4. Select version: `1.0.5`
 5. Click **Add Package**
 
 **Note:** Xcode will automatically fetch the dependencies from Bitbucket using your SSH credentials.

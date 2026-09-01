@@ -155,7 +155,7 @@ CallProvider (ChangeNotifier)
     ↓
 CallFlowManager (State Machine)
     ↓
-ModdakirFlutterPlugin
+ModdakirFlutterNSdk
     ↓
 Platform Channel
     ↓

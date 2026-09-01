@@ -2,7 +2,7 @@
 
 ## ✅ What Was Done
 
-### 1. iOS Plugin Implementation (`ios/Classes/ModdakirFlutterPlugin.swift`)
+### 1. iOS Plugin Implementation (`ios/Classes/ModdakirFlutterNSdk.swift`)
 
 Created complete iOS integration that:
 - ✅ Imports `ModdakirNativeSDK` and `ModdakirCalls`
@@ -80,7 +80,7 @@ Updated `lib/src/platform/moddakir_platform_channel.dart` to support iOS paramet
 
 ### 5. Podspec Configuration
 
-Updated `ios/moddakir_flutter_plugin.podspec`:
+Updated `ios/moddakir_flutter_n_sdk.podspec`:
 - ✅ Set minimum iOS version to 13.0
 - ✅ Added clear instructions for Swift Package Manager setup
 - ✅ Documented Bitbucket SSH requirement
@@ -120,7 +120,7 @@ Updated `ios/moddakir_flutter_plugin.podspec`:
    - Open `example/ios/Runner.xcworkspace`
    - File > Add Package Dependencies
    - Enter URL: `https://github.com/Moddakir-App/moddakir-ios-n-sdk`
-   - Select version: `1.0.0`
+   - Select version: `1.0.5`
    - Click "Add Package"
    - Xcode will automatically fetch Bitbucket dependencies using SSH
 
@@ -147,7 +147,7 @@ Updated `ios/moddakir_flutter_plugin.podspec`:
 ## 🎯 Usage Example
 
 ```dart
-import 'package:moddakir_flutter_plugin/moddakir_flutter_plugin.dart';
+import 'package:moddakir_flutter_n_sdk/moddakir_flutter_n_sdk.dart';
 
 // Step 1: Get session credentials from API
 final sessionData = await SessionApi.getSdkSession(
@@ -156,19 +156,19 @@ final sessionData = await SessionApi.getSdkSession(
   phone: '+1234567890',
   gender: 'male',
   language: 'ar',
-  moddakirId: 'sdk5',
+  moddakirId: 'sdk_5',
   moddakirKey: 'your-api-key',
   sessionInfo: {...},
 );
 
 // Step 2: Start call session with sdkSessionId
-final success = await ModdakirFlutterPlugin.instance.startCallSession(
+final success = await ModdakirFlutterNSdk.instance.startCallSession(
   name: 'John Doe',
   email: 'john@example.com',
   phone: '+1234567890',
   gender: 'male',
   language: 'ar',
-  appName: 'sdk5',
+  appName: 'sdk_5',
   apiKey: 'your-api-key',
   callType: 'Voice',
   callDuration: 30,
@@ -185,7 +185,7 @@ final success = await ModdakirFlutterPlugin.instance.startCallSession(
 );
 
 // Listen to events
-ModdakirFlutterPlugin.instance.callEvents.listen((event) {
+ModdakirFlutterNSdk.instance.callEvents.listen((event) {
   print('Event: ${event.type}');
   if (event is CallStateChangedEvent) {
     print('Call state: ${event.state}');

@@ -147,7 +147,7 @@ final callConfig = CallConfig(
   sessionId: "session-456",
 );
 
-await ModdakirFlutterPlugin.instance.startCall(callConfig);
+await ModdakirFlutterNSdk.instance.startCall(callConfig);
 ```
 
 ### Step 5: Update Call Log (on end)
