@@ -90,7 +90,7 @@ await ModdakirFlutterNSdk.instance.startCallSession(
 
 ### Android
 
-**SDK:** `com.moddakir:call-sdk:1.0.64`
+**SDK:** `com.moddakir:call-sdk:1.0.70`
 
 **Setup:**
 1. SDK dependency in `android/build.gradle`

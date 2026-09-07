@@ -150,6 +150,14 @@ class _SimpleCallScreenState extends State<SimpleCallScreen> {
       language: _selectedLanguage,
       moddakirId: _moddakirIdController.text,
       moddakirKey: _moddakirKeyController.text,
+      sessionInfo: {
+        'fromSurah': _fromSurahController.text,
+        'fromAyah': _fromAyahController.text,
+        'toSurah': _toSurahController.text,
+        'toAyah': _toAyahController.text,
+        'pathType': _pathTypeController.text,
+        'notes': _notesController.text
+      }
     );
   }
 

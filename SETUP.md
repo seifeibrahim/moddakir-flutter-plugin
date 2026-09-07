@@ -196,7 +196,7 @@ For GitHub Actions:
 
 ## Troubleshooting
 
-### Issue: "Could not resolve com.moddakir:call-sdk:1.0.64"
+### Issue: "Could not resolve com.moddakir:call-sdk:1.0.70"
 
 **Solution**: Check GitHub credentials
 ```bash
@@ -232,7 +232,7 @@ _subscription = plugin.callEvents.listen(...); // Too late!
 
 Based on the Android sample from:
 - GitHub: `Mibrahim511/moddakir-sdk-andorid`
-- Package: `com.moddakir:call-sdk:1.0.64`
+- Package: `com.moddakir:call-sdk:1.0.70`
 
 The plugin follows the same listener pattern:
 - `CallbackUpdateCallListener` → `CallFlutterManager.onCallEnded()`

@@ -6,7 +6,7 @@
 
 1. **Gradle Configuration** (`android/build.gradle`)
    - Added GitHub Packages repository for Moddakir SDK
-   - Added dependency: `com.moddakir:call-sdk:1.0.64`
+   - Added dependency: `com.moddakir:call-sdk:1.0.70`
    - Configured credentials via environment variables or gradle.properties
 
 2. **Core Architecture** (`android/src/main/kotlin/`)
@@ -255,7 +255,7 @@ await plugin.startCall(...);
 ## Reference
 
 - Android Sample: `com.example.sdksample.core` package
-- SDK: `com.moddakir:call-sdk:1.0.64`
+- SDK: `com.moddakir:call-sdk:1.0.70`
 - GitHub: `Mibrahim511/moddakir-sdk-andorid`
 
 The implementation follows the exact same pattern as the Android sample you provided, with listeners forwarding to a manager that bridges to Flutter.

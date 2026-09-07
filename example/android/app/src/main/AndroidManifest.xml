@@ -7,7 +7,7 @@
         android:name=".ModdakirApp"
         android:theme="@style/ModdakirSdkTheme"
         android:icon="@mipmap/ic_launcher"
-        tools:replace="android:label">
+        tools:replace="android:label,android:name">
 
         <!-- Flutter MainActivity -->
         <activity

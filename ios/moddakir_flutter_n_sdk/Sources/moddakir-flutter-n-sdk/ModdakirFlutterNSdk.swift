@@ -3,7 +3,7 @@ import UIKit
 import ModdakirNativeSDK
 import ModdakirCalls
 
-public class ModdakirFlutterNSdk: NSObject, FlutterPlugin {
+@objc public class ModdakirFlutterNSdk: NSObject, FlutterPlugin {
 
     private var eventSink: FlutterEventSink?
     private static var eventChannel: FlutterEventChannel?
