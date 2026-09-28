@@ -51,7 +51,7 @@
       "location" : "https://github.com/Moddakir-App/ios_call_module.git",
       "state" : {
         "branch" : "sdk5",
-        "revision" : "b8ec09f251395874565f6c958b3a45f7e81ced19"
+        "revision" : "5fdc00f11a79b41882f9b6c5099ce85ae24d1769"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher",
       "state" : {
-        "revision" : "be0d257b9bd47a4e6e1265fc8c237411825f107a",
-        "version" : "8.12.0"
+        "revision" : "8648fe649c5d62be38721110f835821906e9242a",
+        "version" : "8.13.0"
       }
     },
     {
@@ -78,7 +78,7 @@
       "location" : "https://github.com/Moddakir-App/moddakir-ios-n-sdk.git",
       "state" : {
         "branch" : "main",
-        "revision" : "77143298f0669b2c561fa87133e2b0bc4a86c42c"
+        "revision" : "e5cf3e76a0997a2f017e17748054a54a085e1685"
       }
     },
     {
@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/netless-io/Whiteboard-iOS.git",
       "state" : {
-        "revision" : "ce803b70b4a226ab18d10f72809a4bf41235538a",
-        "version" : "2.16.142"
+        "revision" : "d4f005ae995c22bc8e32ecf6e2f18db23d257f2e",
+        "version" : "2.16.145"
       }
     }
   ],
